@@ -8,3 +8,15 @@ before_install: # a series of instruction to run before we run our project
 script: #contains all commands supposed to be executed so the test will be executed.
   # Travis CI will watch the output of each of these commands, to see if the test succeeds or fails
   - docker run -e CI=true arouzaud/docker-react npm run test # the -e CI=true is here so the npm run test runs and then exits back to the command line, so Travis is not stuck there forever
+
+deploy: #tells Travis how to deploy to AWS
+  provider: elasticbeanstalk # Travis CI comes pre-configured to deploy our app to a set of application providers like EBS
+  region: "eu-west-3"
+  app: "docker-react"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-eu-west-3-975128703222" # when Travis deploys the codebase, takes all the files, zip them all in 1 file and copy to a S3 bucket (basically a hard drive on AWS)
+  bucket_path: "docker-react"
+  on:
+    branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_key_id: $AWS_SECRET_KEY

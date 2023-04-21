@@ -1,23 +1,8 @@
-version: '3' # specify the version of docker compose
-
-# a service basically refers to a type of container
+version: '3'
 services:
   web:
     build:
-      # look in the specified (. for current) directory to build the image, we need a Dockerfile in the directory for that
-      context: . #context specifies where all the files to be pulled from, i.e with . the current working directory where docker compose is
-      dockerfile: Dockerfile.dev
-    ports:
-      - "3000:3000"
-    volumes:
-      - /app/node_modules #tells: do not try to map a folder up against app/node_modules inside the container
-      - .:/app # . for current working directory outiside the container, to (:) the /app folder inside the container
-  tests:
-    build:
       context: .
-      dockerfile: Dockerfile.dev
-    volumes:
-      #rerun anytime a file in the current folder below change
-      - /app/node_modules
-      - .:/app
-    command: [ "npm", "run", "test" ]       
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
