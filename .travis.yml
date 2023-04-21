@@ -17,6 +17,6 @@ deploy: #tells Travis how to deploy to AWS
   bucket_name: "elasticbeanstalk-eu-west-3-975128703222" # when Travis deploys the codebase, takes all the files, zip them all in 1 file and copy to a S3 bucket (basically a hard drive on AWS)
   bucket_path: "docker-react"
   on:
-    branch: main
-    access_key_id: $AWS_ACCESS_KEY
-    secret_key_id: $AWS_SECRET_KEY
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_key_id: $AWS_SECRET_KEY
