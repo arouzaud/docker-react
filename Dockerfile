@@ -11,6 +11,8 @@ RUN npm run build
 
 # start of second phase to set up the web server in another image
 FROM nginx
+#command for Elastic Beanstalk, when starting the container it will look at this instruction, and the port listed will be mapped to Beanstalk
+EXPOSE 80
 #copy from one image to another
 COPY --from=builder app/build /usr/share/nginx/html
 
